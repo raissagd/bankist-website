@@ -32,17 +32,8 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
-/*  Class notes
-const header = document.querySelector('.header');
-const allSections = document.querySelectorAll('.section');
-const allButtons = document.getElementsByTagName('button');
-const message = document.createElement('div');
-message.classList.add('cookie-message');
-message.innerHTML =
-  'We use cookies for improved funcuonality and analytics. <button class="btn--close-modal'; */
-
-// Start of the development
-// Modal window
+/////////////////////////////////
+// Button scrolling
 btnScrollTo.addEventListener('click', function (e) {
   const s1coords = section1.getBoundingClientRect();
 
@@ -59,4 +50,30 @@ btnScrollTo.addEventListener('click', function (e) {
   // });
 
   section1.scrollIntoView({ behavior: 'smooth' });
+});
+
+// //////////////////////////
+// Page navigation
+
+// not so effective solution
+/* document.querySelectorAll('.nav__link').forEach(function (el) {
+  el.addEventListener('click', function (e) {
+    e.preventDefault(); // prevent scrolling while developing
+    const id = this.getAttribute('href');
+    document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+  });
+}); */
+
+// using event delegation
+// 1, Add event listener to common parent element
+// 2. Determine what element originated the event
+
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  e.preventDefault(); // prevent scrolling while developing
+
+  // Matching strategy
+  if (e.target.classList.contains('nav__link')) {
+    const id = e.target.getAttribute('href');
+    document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+  }
 });
