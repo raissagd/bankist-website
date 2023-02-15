@@ -14,6 +14,8 @@ const tabs = document.querySelectorAll('.operations__tab');
 const tabsContainer = document.querySelector('.operations__tab-container');
 const tabsContent = document.querySelectorAll('.operations__content');
 
+const nav = document.querySelector('.nav');
+
 const openModal = function () {
   modal.classList.remove('hidden');
   overlay.classList.remove('hidden');
@@ -101,4 +103,30 @@ tabsContainer.addEventListener('click', function (e) {
   document
     .querySelector(`.operations__content--${clicked.dataset.tab}`)
     .classList.add('operations__content--active');
+});
+
+// Menu fade animation
+const handleOver = function (e, opacity) {
+  if (e.target.classList.contains('nav__link')) {
+    const link = e.target;
+    const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+    const logo = link.closest('.nav').querySelector('img');
+
+    siblings.forEach(el => {
+      if (el !== link) el.style.opacity = opacity;
+    });
+    logo.style.opacity = opacity;
+  }
+};
+
+// mouseover bubbles, mousenter doesnt
+nav.addEventListener('mouseover', function (e) {
+  handleOver(e, 0.5);
+});
+
+// Passing 'argument' into handler (jt can only have one, the event. We have to use the this keyword for the rest)
+//nav.addEventListener('mouseover', handleOver.bind(0.5)); // another way of doing
+
+nav.addEventListener('mouseout', function (e) {
+  handleOver(e, 1);
 });
