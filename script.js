@@ -203,6 +203,7 @@ allSections.forEach(function (section) {
   section.classList.add('section--hidden');
 });
 
+///////////////////////////////////////
 // Lazy loading images
 const imgTargets = document.querySelectorAll('img[data-src]');
 
